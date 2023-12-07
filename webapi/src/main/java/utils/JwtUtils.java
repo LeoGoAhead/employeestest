@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Map;
 
 public class JwtUtils {
-    private static final String KEY = "employeestest";
+    private static final String KEY = "Admin-Token";
 
     public static String genToken(Map<String, Object> claims) {
         return JWT.create().withClaim("claims", claims).withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 12))

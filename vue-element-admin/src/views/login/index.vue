@@ -47,7 +47,7 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
 
-<!--      <div style="position:relative">
+      <!--      <div style="position:relative">
         <div class="tips">
           <span>Username : admin</span>
           <span>Password : any</span>
@@ -76,7 +76,6 @@
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
-import { employeesLoginService } from '@/api/employees'
 
 export default {
   name: 'Login',
@@ -157,12 +156,19 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          employeesLoginService(JSON.parse(JSON.stringify(this.loginForm))).then(() => {
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             this.loading = false
           }).catch(() => {
             this.loading = false
           })
+          /* employeesLoginService(JSON.parse(JSON.stringify(this.loginForm))).then((result) => {
+            setToken(result.data)
+            this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          }) */
         } else {
           console.log('error submit!!')
           return false

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.96.128:3306/employees_test
+    username: root
+    password: root
+server:
+  servlet:
+    context-path: /devapi
+  port: 8586
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

@@ -4,7 +4,7 @@ export function login(data) {
   return request({
     url: '/employees/login',
     method: 'post',
-    data
+    params: data
   })
 }
 

@@ -84,6 +84,38 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/employeesmanager',
+    component: Layout,
+    redirect: '/employeesmanager/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'employeesmanager',
+    meta: {
+      title: '职工管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'employeestongji',
+        component: () => import('@/views/employeesmanager/employeestongji'),
+        name: 'EmployeesTongJi',
+        meta: {
+          title: '职工统计',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'listemployees',
+        component: () => import('@/views/employeesmanager/listemployees'),
+        name: 'ListEmployees',
+        meta: {
+          title: '职工列表',
+          roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
     path: '/documentation',
     component: Layout,
     children: [

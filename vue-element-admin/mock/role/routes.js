@@ -46,6 +46,36 @@ const constantRoutes = [
     ]
   },
   {
+    path: '/employeesmanager',
+    component: 'layout/Layout',
+    redirect: '/employeesmanager/index',
+    alwaysShow: true,
+    meta: {
+      title: 'Permission',
+      icon: 'lock',
+      roles: ['admin', 'editor']
+    },
+    children: [
+      {
+        path: 'employeestongji',
+        component: 'views/employeesmanager/employeestongji',
+        name: 'EmployeesTongJi',
+        meta: {
+          title: '职工统计',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'listemployees',
+        component: 'views/employeesmanager/listemployees',
+        name: 'ListEmployees',
+        meta: {
+          title: '职工列表'
+        }
+      }
+    ]
+  },
+  {
     path: '/documentation',
     component: 'layout/Layout',
     children: [

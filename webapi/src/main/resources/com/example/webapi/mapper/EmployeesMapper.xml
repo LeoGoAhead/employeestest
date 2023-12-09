@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.webapi.mapper.EmployeesMapper">
+    <select id="list" resultType="com.example.webapi.pojo.Employees">
+        select * from employees
+        <where>
+            <if test="empName!=null">
+                emp_name=#{empName}
+            </if>
+            <if test="deptName != null">
+                and dept_name = #{deptName}
+            </if>
+            <if test="empDegreeName">
+                and emp_degree_name = #{dmpDegreeName}
+            </if>
+        </where>
+    </select>
+</mapper>

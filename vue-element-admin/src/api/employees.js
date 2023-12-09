@@ -7,3 +7,11 @@ export const employeesLoginService = (loginData) => {
     params: loginData
   })
 }
+
+export const listEmployees = (data) => {
+  return request({
+    url: '/employees/listemployees',
+    method: 'post',
+    params: data
+  })
+}

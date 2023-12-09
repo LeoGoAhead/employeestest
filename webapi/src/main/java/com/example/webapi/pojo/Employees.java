@@ -15,7 +15,7 @@ public class Employees {
     private String password;
     @NotEmpty
     private String empName;
-    private Integer sex;
+    private String sex;
     @NotEmpty
     private Integer age;
     @NotEmpty

@@ -15,3 +15,27 @@ export const listEmployees = (data) => {
     params: data
   })
 }
+
+export const createEmployees = (data) => {
+  return request({
+    url: '/employees/addemployees',
+    method: 'post',
+    params: data
+  })
+}
+
+export const updateEmployees = (data) => {
+  return request({
+    url: '/employees/updateemployees',
+    method: 'post',
+    params: data
+  })
+}
+
+export const deleteEmployees = (id) => {
+  return request({
+    url: '/employees/deleteemployees',
+    method: 'post',
+    params: { id: id }
+  })
+}

@@ -33,4 +33,19 @@ public class EmployeesServiceImpl implements EmployeesService {
         pb.setItems(p.getResult());
         return pb;
     }
+
+    @Override
+    public void add(Employees employees) {
+        employeesMapper.add(employees);
+    }
+
+    @Override
+    public void update(Employees employees) {
+        employeesMapper.update(employees);
+    }
+
+    @Override
+    public void delete(int id) {
+        employeesMapper.delete(id);
+    }
 }

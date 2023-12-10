@@ -7,4 +7,10 @@ public interface EmployeesService {
     Employees validateUser(String username, String password);
 
     PageBean<Employees> list(int pageNum, int pageSize, String name, String deptName, String empDegreeName);
+
+    void add(Employees employees);
+
+    void update(Employees employees);
+
+    void delete(int id);
 }

@@ -61,4 +61,30 @@ public class EmployeesController {
         PageBean<Employees> list = employeesService.list(pageNum, pageSize, name, deptName, empDegreeName);
         return Result.success(list);
     }
+
+    @PostMapping("/addemployees")
+    public Result addemployees(Employees employees) {
+        try {
+            employeesService.add(employees);
+            return Result.success();
+        } catch (Exception e) {
+            return Result.error("新增失败");
+        }
+    }
+
+    @PostMapping("/updateemployees")
+    public Result updatEemployees(Employees employees) {
+        try {
+            employeesService.update(employees);
+            return Result.success();
+        } catch (Exception e) {
+            return Result.error("更新失败");
+        }
+    }
+
+    @PostMapping("/deleteemployees")
+    public Result deleteEmployees(int id) {
+        employeesService.delete(id);
+        return Result.success();
+    }
 }

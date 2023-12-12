@@ -8,9 +8,6 @@ import java.util.List;
 @Mapper
 public interface EmployeesMapper {
 
-    @Select("select * from employees where username = #{username} and password = #{password}")
-    Employees validateUser(@Param("username") String username, @Param("password") String password);
-
     List<Employees> list(@Param("empName") String empName, @Param("deptName") String deptName, @Param("empDegreeName") String empDegreeName);
 
     @Insert("insert into employees(username, password, emp_name, sex, age, dept_name, emp_degree_name) " +

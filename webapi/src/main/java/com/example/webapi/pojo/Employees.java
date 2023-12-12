@@ -6,20 +6,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class Employees {
-    @NotNull
-    private Integer id;
-    @NotEmpty
-    private String username;
-    @JsonIgnore
-    private String password;
+public class Employees extends BasePojo {
     @NotEmpty
     private String empName;
-    private String sex;
+    private Integer sex;
     @NotEmpty
     private Integer age;
     @NotEmpty
-    private String deptName;
+    private Integer deptName;
     @NotEmpty
-    private String empDegreeName;
+    private Integer empDegreeName;
 }

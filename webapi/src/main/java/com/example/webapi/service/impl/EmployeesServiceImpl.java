@@ -19,11 +19,6 @@ public class EmployeesServiceImpl implements EmployeesService {
     private EmployeesMapper employeesMapper;
 
     @Override
-    public Employees validateUser(String username, String password) {
-        return employeesMapper.validateUser(username, Md5Util.getMD5String(password));
-    }
-
-    @Override
     public PageBean<Employees> list(int pageNum, int pageSize, String empName, String deptName, String dmpDegreeName) {
         PageBean<Employees> pb = new PageBean<>();
         PageHelper.startPage(pageNum, pageSize);

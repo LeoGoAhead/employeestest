@@ -8,6 +8,27 @@ export const employeesLoginService = (loginData) => {
   })
 }
 
+export const listSex = () => {
+  return request({
+    url: '/employees/listsex',
+    method: 'post'
+  })
+}
+
+export const listDepartment = () => {
+  return request({
+    url: '/employees/listdepartment',
+    method: 'post'
+  })
+}
+
+export const listDegreeList = () => {
+  return request({
+    url: '/employees/listdegree',
+    method: 'post'
+  })
+}
+
 export const listEmployees = (data) => {
   return request({
     url: '/employees/listemployees',

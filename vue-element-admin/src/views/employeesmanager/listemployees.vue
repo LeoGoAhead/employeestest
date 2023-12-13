@@ -40,20 +40,20 @@
         </el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-select v-model="entity.sex" class="filter-item" placeholder="请选择性别" style="width: 100%;">
-            <el-option v-for="item in sexList" :key="item.key" :label="item.name" :value="item.key" />
+            <el-option v-for="item in sexList" :key="item.key" :label="item.value" :value="item.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="年龄" prop="age">
-          <el-input v-model="entity.age" style="width: 100%;" @change="checkNum" />
+          <el-input v-model="entity.age" style="width: 100%;" placeholder="请输入年龄" @change="checkNum" />
         </el-form-item>
         <el-form-item label="部门名称" prop="deptName">
           <el-select v-model="entity.deptName" class="filter-item" placeholder="请选择部门" style="width: 100%;">
-            <el-option v-for="item in deptNameList" :key="item.value" :label="item.name" :value="item.value" />
+            <el-option v-for="item in deptNameList" :key="item.key" :label="item.value" :value="item.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="学历" prop="empDegreeName">
           <el-select v-model="entity.empDegreeName" class="filter-item" placeholder="请选择学历" style="width: 100%;">
-            <el-option v-for="item in empDegreeNameList" :key="item.value" :label="item.name" :value="item.value" />
+            <el-option v-for="item in empDegreeNameList" :key="item.key" :label="item.value" :value="item.value" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -69,7 +69,7 @@
   </div>
 </template>
 <script>
-import { listEmployees, createEmployees, updateEmployees, deleteEmployees } from '@/api/employees'
+import { listSex, listDepartment, listDegreeList, listEmployees, createEmployees, updateEmployees, deleteEmployees } from '@/api/employees'
 import Pagination from '@/components/Pagination'
 
 export default {
@@ -93,20 +93,9 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       title: '',
-      sexList: [
-        { key: '男' },
-        { key: '女' }
-      ],
-      deptNameList: [
-        { name: '业务部', value: '业务部' },
-        { name: '后勤部', value: '后勤部' },
-        { name: '人事部', value: '人事部' }
-      ],
-      empDegreeNameList: [
-        { name: '大专', value: '大专' },
-        { name: '本科', value: '本科' },
-        { name: '研究生', value: '研究生' }
-      ],
+      sexList: [],
+      deptNameList: [],
+      empDegreeNameList: [],
       rules: {
         empName: [{ required: true, message: '请输入员工姓名', trigger: 'change' }],
         sex: [{ required: true, message: '请选择员工性别', trigger: 'change' }],
@@ -117,6 +106,9 @@ export default {
     }
   },
   created() {
+    this.initSexList()
+    this.initDepartmentList()
+    this.initDegreeList()
     this.getList()
   },
   methods: {
@@ -156,6 +148,21 @@ export default {
     },
     handleDownload() {
 
+    },
+    initSexList() {
+      listSex().then(res => {
+        this.sexList = res.data
+      })
+    },
+    initDepartmentList() {
+      listDepartment().then(res => {
+        this.deptNameList = res.data
+      })
+    },
+    initDegreeList() {
+      listDegreeList().then(res => {
+        this.empDegreeNameList = res.data
+      })
     },
     getList() {
       this.listLoading = true

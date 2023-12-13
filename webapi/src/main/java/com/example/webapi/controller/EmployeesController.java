@@ -1,5 +1,8 @@
 package com.example.webapi.controller;
 
+import com.example.webapi.Enum.DegreeEnum;
+import com.example.webapi.Enum.DepartmentEnum;
+import com.example.webapi.Enum.SexEnum;
 import com.example.webapi.pojo.Employees;
 import com.example.webapi.pojo.PageBean;
 import com.example.webapi.pojo.Result;
@@ -11,6 +14,7 @@ import utils.JwtUtils;
 import utils.ThreadLocalUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,6 +24,23 @@ public class EmployeesController {
     @Autowired
     private EmployeesService employeesService;
 
+    @PostMapping("/listsex")
+    public Result listSex() {
+        List<Map<String, Object>> maps = SexEnum.listSexEnum();
+        return Result.success(maps);
+    }
+
+    @PostMapping("/listdepartment")
+    public Result listDepartment() {
+        List<Map<String, Object>> maps = DepartmentEnum.listDepartmentEnum();
+        return Result.success(maps);
+    }
+
+    @PostMapping("/listdegree")
+    public Result listDegree() {
+        List<Map<String, Object>> maps = DegreeEnum.listDegreeEnum();
+        return Result.success(maps);
+    }
 
     @PostMapping("/listemployees")
     public Result<PageBean<Employees>> list(int pageNum, int pageSize, String name, String deptName, String empDegreeName) {

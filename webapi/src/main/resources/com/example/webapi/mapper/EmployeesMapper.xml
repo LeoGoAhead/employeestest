@@ -7,13 +7,13 @@
         select * from Employees
         <where>
             <if test="empName!=null and !''.equals(empName.trim())">
-                emp_name=#{empName}
+                and emp_name like concat('%', #{empName}, '%')
             </if>
             <if test="deptName > 0">
                 and dept_name = #{deptName}
             </if>
             <if test="empDegreeName > 0">
-                and emp_degree_name = #{dmpDegreeName}
+                and emp_degree_name = #{empDegreeName}
             </if>
         </where>
     </select>

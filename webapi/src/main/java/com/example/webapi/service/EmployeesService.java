@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EmployeesService {
 
-    PageBean<Employees> list(int pageNum, int pageSize, String name, Integer deptName, Integer empDegreeName);
+    PageBean<Employees> list(int pageNum, int pageSize, String name, Integer deptName, Integer dmpDegreeName);
 
     void add(Employees employees);
 

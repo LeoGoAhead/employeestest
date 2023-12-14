@@ -127,7 +127,7 @@ export default {
     },
     handleUpdate(row) {
       this.title = '修改职工'
-      this.entity = Object.assign({}, row) // copy obj
+      this.entity = Object.assign({}, row)
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {
@@ -209,6 +209,17 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const data = Object.assign({}, this.entity)
+
+          console.log(typeof data.empDegreeName, 'datadatadatadatadatadatadatadatadatadatadata')
+          if (typeof data.sex === 'string') {
+            data.sex = this.sexList.filter((k) => k.value === data.sex)[0].key
+          }
+          if (typeof data.deptName === 'string') {
+            data.deptName = this.deptNameList.filter((k) => k.value === data.deptName)[0].key
+          }
+          if (typeof data.empDegreeName === 'string') {
+            data.empDegreeName = this.empDegreeNameList.filter((k) => k.value === data.empDegreeName)[0].key
+          }
           updateEmployees(data).then(() => {
             const index = this.list.findIndex(v => v.id === this.entity.id)
             this.list.splice(index, 1, this.entity)
@@ -219,6 +230,7 @@ export default {
               type: 'success',
               duration: 2000
             })
+            this.handleFilter()
           })
         }
       })

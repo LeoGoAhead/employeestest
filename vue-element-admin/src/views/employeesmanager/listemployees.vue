@@ -2,11 +2,11 @@
   <div class="app-container">
     <div class="filter-container">
       <el-input v-model="listQuery.name" placeholder="姓名" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-select v-model="listQuery.deptName" placeholder="部门" clearable style="width: 90px" class="filter-item">
-        <!-- <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" /> -->
+      <el-select v-model="listQuery.deptNameId" placeholder="部门" clearable style="width: 90px" class="filter-item">
+        <el-option v-for="item in deptNameList" :key="item.key" :label="item.value" :value="item.key" />
       </el-select>
-      <el-select v-model="listQuery.dmpDegreeName" placeholder="学历" clearable class="filter-item" style="width: 130px">
-        <!-- <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key" /> -->
+      <el-select v-model="listQuery.dmpDegreeNameId" placeholder="学历" clearable class="filter-item" style="width: 130px">
+        <el-option v-for="item in empDegreeNameList" :key="item.key" :label="item.value" :value="item.key" />
       </el-select>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         查询
@@ -40,7 +40,7 @@
         </el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-select v-model="entity.sex" class="filter-item" placeholder="请选择性别" style="width: 100%;">
-            <el-option v-for="item in sexList" :key="item.key" :label="item.value" :value="item.value" />
+            <el-option v-for="item in sexList" :key="item.key" :label="item.value" :value="item.key" />
           </el-select>
         </el-form-item>
         <el-form-item label="年龄" prop="age">
@@ -48,12 +48,12 @@
         </el-form-item>
         <el-form-item label="部门名称" prop="deptName">
           <el-select v-model="entity.deptName" class="filter-item" placeholder="请选择部门" style="width: 100%;">
-            <el-option v-for="item in deptNameList" :key="item.key" :label="item.value" :value="item.value" />
+            <el-option v-for="item in deptNameList" :key="item.key" :label="item.value" :value="item.key" />
           </el-select>
         </el-form-item>
         <el-form-item label="学历" prop="empDegreeName">
           <el-select v-model="entity.empDegreeName" class="filter-item" placeholder="请选择学历" style="width: 100%;">
-            <el-option v-for="item in empDegreeNameList" :key="item.key" :label="item.value" :value="item.value" />
+            <el-option v-for="item in empDegreeNameList" :key="item.key" :label="item.value" :value="item.key" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -70,6 +70,7 @@
 </template>
 <script>
 import { listSex, listDepartment, listDegreeList, listEmployees, createEmployees, updateEmployees, deleteEmployees } from '@/api/employees'
+import { downloadExcel } from '@/utils/download'
 import Pagination from '@/components/Pagination'
 
 export default {
@@ -84,8 +85,8 @@ export default {
       listLoading: true,
       listQuery: {
         empName: '',
-        deptName: '',
-        dmpDegreeName: '',
+        deptNameId: null,
+        dmpDegreeNameId: null,
         pageNum: 1,
         pageSize: 10
       },
@@ -147,7 +148,7 @@ export default {
       }).catch(() => {})
     },
     handleDownload() {
-
+      downloadExcel('/employees/exportemployees').then(res => {})
     },
     initSexList() {
       listSex().then(res => {
@@ -168,6 +169,14 @@ export default {
       this.listLoading = true
       listEmployees(this.listQuery).then(response => {
         this.list = response.data.items
+        this.list.forEach((x) => {
+          const sexitem = this.sexList.filter((k) => k.key === x.sex)[0]
+          x.sex = sexitem.value
+          const deptitem = this.deptNameList.filter((k) => k.key === x.deptName)[0]
+          x.deptName = deptitem.value
+          const degreeitem = this.empDegreeNameList.filter((k) => k.key === x.empDegreeName)[0]
+          x.empDegreeName = degreeitem.value
+        })
         this.total = response.data.total
         this.listLoading = false
       })
@@ -182,8 +191,6 @@ export default {
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          this.entity.username = 'www'
-          this.entity.password = 'www'
           createEmployees(this.entity).then(() => {
             this.list.unshift(this.temp)
             this.dialogFormVisible = false

@@ -76,7 +76,6 @@
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
-import { login } from '@/api/user'
 
 export default {
   name: 'Login',

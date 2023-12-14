@@ -19,6 +19,15 @@ public enum DepartmentEnum {
         this.value = value;
     }
 
+    public static DepartmentEnum getDepartmentEnum(int key) {
+        for (DepartmentEnum val : DepartmentEnum.values()) {
+            if (val.key == key) {
+                return val;
+            }
+        }
+        return null;
+    }
+
     public int getKey() {
         return key;
     }

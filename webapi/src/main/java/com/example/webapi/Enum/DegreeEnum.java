@@ -19,6 +19,15 @@ public enum DegreeEnum {
         this.value = value;
     }
 
+    public static DegreeEnum getDegreeEnum(int key) {
+        for (DegreeEnum val : DegreeEnum.values()) {
+            if (val.key == key) {
+                return val;
+            }
+        }
+        return null;
+    }
+
     public int getKey() {
         return key;
     }

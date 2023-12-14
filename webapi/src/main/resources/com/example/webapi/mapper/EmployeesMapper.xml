@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.webapi.mapper.EmployeesMapper">
     <select id="list" resultType="com.example.webapi.pojo.Employees">
-        select * from employees
+        select * from Employees
         <where>
             <if test="empName!=null and !''.equals(empName.trim())">
                 emp_name=#{empName}
             </if>
-            <if test="deptName != null and !''.equals(deptName.trim())">
+            <if test="deptName > 0">
                 and dept_name = #{deptName}
             </if>
-            <if test="empDegreeName and !''.equals(empDegreeName.trim())">
+            <if test="empDegreeName > 0">
                 and emp_degree_name = #{dmpDegreeName}
             </if>
         </where>

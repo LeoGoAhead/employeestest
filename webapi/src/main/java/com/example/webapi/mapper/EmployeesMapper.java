@@ -8,15 +8,15 @@ import java.util.List;
 @Mapper
 public interface EmployeesMapper {
 
-    List<Employees> list(@Param("empName") String empName, @Param("deptName") String deptName, @Param("empDegreeName") String empDegreeName);
+    List<Employees> list(@Param("empName") String empName, @Param("deptName") int deptName, @Param("empDegreeName") int empDegreeName);
 
-    @Insert("insert into employees(username, password, emp_name, sex, age, dept_name, emp_degree_name) " +
-            "values(#{username}, #{password}, #{empName}, #{sex}, #{age}, #{deptName}, #{empDegreeName})")
+    @Insert("insert into Employees(emp_name, sex, age, dept_name, emp_degree_name) " +
+            "values(#{empName}, #{sex}, #{age}, #{deptName}, #{empDegreeName})")
     void add(Employees employees);
 
-    @Update("update employees set username = #{username}, password = #{password}, emp_name = #{empName}, sex = #{sex}, age = #{age}, dept_name = #{deptName}, emp_degree_name = #{empDegreeName} where id = #{id}")
+    @Update("update Employees set emp_name = #{empName}, sex = #{sex}, age = #{age}, dept_name = #{deptName}, emp_degree_name = #{empDegreeName} where id = #{id}")
     void update(Employees employees);
 
-    @Delete("delete from employees where id = #{id}")
+    @Delete("delete from Employees where id = #{id}")
     void delete(int id);
 }

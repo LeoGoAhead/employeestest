@@ -209,8 +209,6 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const data = Object.assign({}, this.entity)
-
-          console.log(typeof data.empDegreeName, 'datadatadatadatadatadatadatadatadatadatadata')
           if (typeof data.sex === 'string') {
             data.sex = this.sexList.filter((k) => k.value === data.sex)[0].key
           }

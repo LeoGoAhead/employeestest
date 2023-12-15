@@ -15,6 +15,7 @@ import utils.JwtUtils;
 import utils.ThreadLocalUtil;
 import utils.Util;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +87,10 @@ public class EmployeesController {
         PageBean<Employees> list = employeesService.list(pageNo, pageSize, name, deptName, dmpDegreeName);
         String fileName = "职工列表_" + UUID.randomUUID().toString() + ".xlsx";
         String filePath = Util.combinePath("D:/", "temp", fileName);
+        File file = new File(filePath);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
         String[] titles = excelPoiService.getExportExcelTitles(ExcelPoiService.exportEmployees);
         List<String[]> contents = employeesService.getExcelContents(list);
         excelPoiService.writeExcel(filePath, "职工列表", titles, contents, null);

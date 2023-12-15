@@ -32,7 +32,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageNum" :limit.sync="listQuery.pageSize" @pagination="getList" />
     <el-dialog :title="title" :visible.sync="dialogFormVisible" center>
       <el-form ref="dataForm" :rules="rules" :model="entity" label-position="left" label-width="80px" style="width: 90%; margin-left:50px;">
         <el-form-item label="姓名" prop="empName">
@@ -119,6 +119,7 @@ export default {
     },
     handleCreate() {
       this.title = '添加职工'
+      this.entity = {}
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
       this.$nextTick(() => {
